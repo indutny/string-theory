@@ -1,0 +1,181 @@
+%\documentclass[aps,prd,preprint]{revtex4-1}
+\documentclass[aps,prd,final,twocolumn,floats,floatfix,nofootinbib,10pt]{revtex4-1}
+
+% Note:  comment out one of the two documentclass commands, depending
+% on whether you need the final or preprint version. It is most convenient
+% to work in preprint mode, and switch to final only at the end.
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage[english]{babel}
+\usepackage{helvet}
+\usepackage{microtype}
+\usepackage{dsfont}
+\usepackage[pdftex]{hyperref}
+\usepackage{tikz}
+
+\special{papersize=8.5in,11in}
+\setlength{\pdfpageheight}{\paperheight}
+\setlength{\pdfpagewidth}{\paperwidth}
+
+\begin{document}
+
+\title{Exercise (2.6) in Polchinski}
+\author{indutny}
+\date{\today}
+\noaffiliation
+
+\maketitle
+
+\section{Problem statement}
+
+Given the transformation law for the metric:
+\begin{align}
+  \delta g_{ab} = -\partial_a v_b - \partial_b v_a
+\end{align}
+determine the most general $v^a(\sigma)$ that leaves flat $d$-dimensional
+Euclidian metric $\delta_{ab}$ invariant up to a local rescaling.
+
+\section{Solution}
+
+The case of $d = 2$ is covered extensively in String Theory textbooks, so we
+will concentrate our efforts on $d > 2$ here.
+
+\subsection{Notation}
+
+Everywhere below $a$, $b$, and $c$ are three different indices:
+$a \neq b$, $b \neq c$, $a \neq c$. Note that it means that most of the
+derivation does not apply to $d = 2$. This the reason why $d = 2$ is special.
+
+$m$ and $n$ are possibly equal, but both non-negative integers: $m \geq 0$,
+$n \geq 0$.
+
+\subsection{Derivation}
+
+The local rescaling invariance imposes following constraints:
+\begin{align}
+  \partial_a v_a & = \partial_b v_b, \label{eq:diagonal} \\
+  \partial_b v_a & = -\partial_a v_b \label{eq:off-diagonal}.
+\end{align}
+
+For $d > 2$ we can derive an additional constraint:
+\begin{align}
+  \partial_c \left( \partial_b v_a \right) & =
+  -\partial_c \left( \partial_a v_b \right) =
+  -\partial_a \left( \partial_c v_b \right) = \\
+  \partial_a \partial_b v_c & = \partial_b \left( \partial_a v_c \right),
+\end{align}
+which is equivalent to:
+\begin{align} \label{eq:two-vars}
+  \partial_b \left( \partial_c v_a - \partial_a v_c \right) =
+  2 \partial_b \partial_c v_a = 0.
+\end{align}
+
+This immediately implies that $v_a$ can't have terms with three different
+coordinate variables:
+\begin{align}
+  v_a & = \sum_{\overset{m \geq 0, n \geq 0}{b \neq a}}
+  c^{(ab)}_{mn} (\sigma_a)^m (\sigma_b)^n, \\
+  c^{(ab)}_{m0} & = c^{(ac)}_{m0}.
+\end{align}
+
+In fact, the space of solutions is even smaller. The term
+\begin{align}
+  v_a = (\sigma_a)^{m + 2} (\sigma_b)^{n + 1} + \cdots
+\end{align}
+is incompatible with constraints:
+\begin{align}
+  \partial_c v_c = \partial_a v_a =
+    (m + 2) (\sigma_a)^{m + 1} (\sigma_b)^{n + 1},
+\end{align}
+but $v_c$ can't have a term proportional to
+$(\sigma_c) (\sigma_a)^{m + 1} (\sigma_b)^{n + 1}$ due to \eqref{eq:two-vars}.
+Therefore
+\begin{align} \label{eq:corner}
+  c^{(ab)}_{(m + 2)(n + 1)} = 0.
+\end{align}
+As we shall see only finitely few of them are non-zero, and even less
+are independent of each other.
+
+The first constraint \eqref{eq:diagonal} can be translated from differential
+equation
+\begin{align}
+  \partial_a v_a & = \sum m c^{(ab)}_{mn} (\sigma_a)^{m - 1} (\sigma_b)^n, \\
+  \partial_b v_b & = \sum n c^{(ba)}_{nm} (\sigma_b)^{n - 1} (\sigma_a)^m,
+  \partial_a v_a = \partial_b v_b
+\end{align}
+to a relation between coefficients
+\begin{align} \label{eq:first-rel}
+  (m + 1) c^{(ab)}_{(m + 1) n} = (n+1) c^{(ba)}_{(n + 1) m}.
+\end{align}
+
+Similarly \eqref{eq:off-diagonal} translates to
+\begin{align} \label{eq:second-rel}
+  (n + 1) c^{(ab)}_{m (n + 1)} = -(m + 1) c^{(ba)}_{n (m + 1)}.
+\end{align}
+
+Combining \eqref{eq:first-rel} and \eqref{eq:second-rel} together we see that
+\begin{align} \label{eq:third-rel}
+  c^{(ab)}_{(m + 2) n} = -\frac{(n + 2) (n + 1)}{(m + 2) (m + 1)}
+    c^{(ab)}_{m (n + 2)},
+\end{align}
+which together with \eqref{eq:corner} implies that
+\begin{align}
+  c^{(ab)}_{m (n + 3)} \simeq c^{(ab)}_{(m + 2) (n + 1)} = 0, \\
+  c^{(ab)}_{(m + 4) n} \simeq c^{(ab)}_{(m + 2) (n + 2)} = 0.
+\end{align}
+Therefore the only coefficients that can be non-zero are
+\begin{align}
+  c^{(a)} \equiv c^{(ab)}_{00}, \; c^{(a)}_{1} \equiv c^{(ab)}_{10}, \;
+  c^{(ab)}_{01}, \\
+  c^{(ab)}_{11}, \; c^{(ab)}_{12}, \; c^{(a)}_{3} \equiv c^{(ab)}_{30}.
+\end{align}
+We can also work out relations between them. Using \eqref{eq:first-rel} and
+\eqref{eq:second-rel}:
+\begin{align}
+  c^{(a)}_{1} & = c^{(ab)}_{10} = c^{(ba)}_{10} = c^{(b)}_{1},
+    \label{eq:first-family} \\
+  c^{(ab)}_{01} & = -c^{(ba)}_{01} \label{eq:second-family}, \\
+  c^{(ab)}_{11} & = -2 c^{(ba)}_{02} = 2 c^{(ba)}_{20} = 2 c^{(b)}_{2},
+    \label{eq:third-family} \\
+  c^{(a)}_{3} & = c^{(ab)}_{30} = \frac{1}{3} c^{(ba)}_{12} =
+    -\frac{1}{3} c^{(ab)}_{12} = -c^{(ba)}_{30} = -c^{(b)}_3{}
+    \label{eq:fourth-family},
+\end{align}
+but the \eqref{eq:fourth-family} has to be zero
+\begin{align}
+  c^{(a)}_{3} = -c^{(b)}_{3} = c^{(c)}_{3} = -c^{(a)}_3 = 0.
+\end{align}
+
+Before writing out the most general form of $v^a$, let us count the number of
+independent solutions
+\begin{align}
+  \# \left\{ c^{(a)} \right\} & = d, \\
+  \# \left\{ c^{(a)}_1 = c^{(b)}_1 \right\} & = 1, \\
+  \# \left\{ c^{(ab)}_{01} = - c^{(ba)}_{01} \right\} & =
+    \frac{d (d - 1)}{2}, \\
+  \# \left\{ c^{(a)}_{2} \right\} & = d,
+\end{align}
+and the total
+\begin{align}
+  & d + 1 + \frac{d (d - 1)}{2} + d \\
+  & = \frac{2 d + 2 + d^2 - d + 2 d}{2} \\
+  & = \frac{d^2 + 3 d + 2}{2} \\
+  & = \frac{(d + 1) (d + 2)}{2}.
+\end{align}
+
+\subsection{Result}
+
+The most general form of solution is:
+\begin{align}
+  v^a = & c_0 + c_1 (\sigma_a) + c_2 (\sigma_a)^2 \notag \\
+        & + \sum_b \left[ c_3 (\sigma_a) (\sigma_b) + -2 c_4 (\sigma_b)^2
+          \right] \notag \\
+        & + \sum_b c_5 \left[
+          (\sigma_a)^3 - \frac{1}{3} (\sigma_a) (\sigma_b)^2 \right].
+\end{align}
+
+\end{document}
