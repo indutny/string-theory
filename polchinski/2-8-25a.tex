@@ -1,0 +1,89 @@
+%\documentclass[aps,prd,preprint]{revtex4-1}
+\documentclass[aps,prd,final,twocolumn,floats,floatfix,nofootinbib,10pt]{revtex4-1}
+
+% Note:  comment out one of the two documentclass commands, depending
+% on whether you need the final or preprint version. It is most convenient
+% to work in preprint mode, and switch to final only at the end.
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage[english]{babel}
+\usepackage{helvet}
+\usepackage{microtype}
+\usepackage{dsfont}
+\usepackage[pdftex]{hyperref}
+\usepackage{tikz}
+
+\special{papersize=8.5in,11in}
+\setlength{\pdfpageheight}{\paperheight}
+\setlength{\pdfpagewidth}{\paperwidth}
+
+\begin{document}
+
+\title{Deriving (2.8.25a) in Polchinski}
+\author{indutny}
+\date{\today}
+\noaffiliation
+
+\maketitle
+
+\section{Target formula}
+
+\begin{align}\label{eq:25a}
+\alpha_n = - \frac{i n}{(2 \alpha')^{1/2}} X_{-n} - i \left( \frac{\alpha'}{2} \right)^{1/2}
+  \frac{\partial}{\partial X_n} \tag{2.8.25a}
+\end{align}
+
+\section{Derivation}
+
+Start by noting that:
+\begin{align}
+X & = X_i + X_0 +
+  \sum_{n=1}^\infty \left( z^n X_n + \overline{z}^n X_{-n} \right), \\
+S & = \frac{1}{2 \pi \alpha'} \int_{|z| < 1} d^2z \;
+  \partial X \bar{\partial} X.
+\end{align}
+
+Computing a partial derivative of the action with respect to the boundary field
+mode we get:
+\begin{align}
+\frac{\partial S}{\partial X_n} & = \frac{1}{2 \pi \alpha'} \int_{|z| < 1} d^2z
+  \; \partial (z^n) \bar{\partial} X \\
+  & = \frac{1}{2 \pi \alpha'} \int_{|z| < 1} d^2z \;
+    \partial( z^n \bar{\partial} X) \\
+  & = i \frac{1}{2 \pi \alpha'} \oint_{|z| = 1} d\bar{z} \;
+    z^n \bar{\partial} X \\
+  & = i \frac{1}{2 \pi \alpha'} \oint_{|z| = 1} d\bar{z} \;
+    \bar{z}^{-n} \bar{\partial} X \\
+  & = \frac{1}{\alpha'} n X_{-n}.
+\end{align}
+
+Which means that the wavefunctional is an eigenstate of such operator:
+\begin{align}
+\frac{\partial}{\partial X_n} \Psi_1[X_b] & =
+  \frac{\partial}{\partial X_n} \int [dX_i]_{X_b = 0} \exp(-S) \\
+  & = -\frac{n}{\alpha'} X_{-n} \left( \int [dX_i]_{X_b = 0} \exp(-S) \right) \\
+  & = -\frac{n}{\alpha'} X_{-n} \Psi_1[X_b]
+\end{align}
+or, using the factors from \ref{eq:25a} we see that the first and the second
+terms of \ref{eq:25a} cancel each other when applied to $\Psi_1$
+\begin{align}
+-i \left(\frac{\alpha'}{2}\right)^{1/2} \frac{\partial}{\partial X_n}
+  \Psi_1[X_b] = -\frac{in}{(2 \alpha')^{1/2}}  X_n \Psi_1[X_b].
+\end{align}
+
+Now using the definition of $\alpha_m$ we can compute it's value using the
+boundary contour
+\begin{align}
+  \alpha_m = i \left(\frac{2}{\alpha'} \right)^{1/2} \oint_z
+  \frac{dz}{2 \pi i} z^m \partial X_b(z) =
+  -in \left(\frac{2}{\alpha'} \right)^{1/2} X_{-n}
+\end{align}
+which is precisely twice the first term of \ref{eq:25a}.
+
+I have proven nothing.
+
+\end{document}
